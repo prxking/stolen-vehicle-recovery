@@ -1,0 +1,33 @@
+# Environments
+.env
+bin/
+lib/
+include/
+share/
+pyvenv.cfg
+__pycache__/
+
+# Node / Next.js
+node_modules/
+.next/
+npm-debug.log
+
+# Video files and models
+*.mp4
+*.avi
+*.pt
+*.pth
+runs/
+
+# macOS
+.DS_Store
+
+# Databases
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Temporary / Uploads
+dataset/stolen-vehicle-recovery/public/detections/*
+!dataset/stolen-vehicle-recovery/public/detections/.gitkeep

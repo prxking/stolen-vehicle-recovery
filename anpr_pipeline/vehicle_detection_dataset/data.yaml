@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['vehicles']
+
+roboflow:
+  workspace: naveen-1
+  project: project-v1-luppm
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/naveen-1/project-v1-luppm/dataset/1

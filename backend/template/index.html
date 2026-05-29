@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ANPR Dashboard</title>
+    <style>
+        body { font-family: Arial; background:#111; color:#fff; }
+        table { width:100%; border-collapse: collapse; margin-top:20px; }
+        th, td { padding:8px; border-bottom:1px solid #333; }
+        th { background:#222; }
+        .alert { color:red; font-weight:bold; }
+    </style>
+</head>
+<body>
+
+<h2>🚓 ANPR Vehicle Logs</h2>
+
+<table>
+<tr>
+    <th>Plate</th>
+    <th>Class</th>
+    <th>Color</th>
+    <th>Location</th>
+    <th>Time</th>
+    <th>Status</th>
+</tr>
+
+{% for l in logs %}
+<tr>
+    <td>{{ l[0] }}</td>
+    <td>{{ l[1] }}</td>
+    <td>{{ l[2] }}</td>
+    <td>{{ l[3] }}</td>
+    <td>{{ l[4] }}</td>
+    <td class="{{ 'alert' if l[5]==1 else '' }}">
+        {{ '🚨 STOLEN' if l[5]==1 else 'OK' }}
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+</body>
+</html>

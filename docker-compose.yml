@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  nextjs-portal:
+    build:
+      context: ./dataset/stolen-vehicle-recovery
+      dockerfile: Dockerfile
+    container_name: stolen-vehicle-nextjs
+    ports:
+      - "3000:3000"
+    volumes:
+      # Share the detections folder with the Python container
+      - shared_detections:/app/public/detections
+      # Persist the SQLite database so data isn't lost when the container restarts
+      - ./dataset/stolen-vehicle-recovery/dev.db:/app/dev.db
+    restart: always
+
+  python-yolo:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    container_name: stolen-vehicle-python
+    environment:
+      - HEADLESS=True
+      - NEXTJS_API_URL=http://nextjs-portal:3000/api/detect
+    volumes:
+      # Share the detections folder so Next.js can serve the images python saves
+      - shared_detections:/app/dataset/stolen-vehicle-recovery/public/detections
+    depends_on:
+      - nextjs-portal
+    # Tell Python to hit the Next.js API inside the docker network
+    extra_hosts:
+      - "localhost:host-gateway"
+    restart: always
+
+volumes:
+  shared_detections:

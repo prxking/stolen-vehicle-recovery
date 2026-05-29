@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['License']
+
+roboflow:
+  workspace: naveen-1
+  project: number_plate-sjto3-xrg7p
+  version: 4
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/naveen-1/number_plate-sjto3-xrg7p/dataset/4
