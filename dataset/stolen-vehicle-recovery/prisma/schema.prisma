@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model ReportedVehicle {
+  id           String   @id @default(cuid())
+  plateNumber  String
+  location     String
+  make         String
+  model        String
+  variant      String?
+  color        String
+  aadharNumber String
+  phone        String
+  imagePath    String?
+  status       String   @default("MISSING") // MISSING, SPOTTED, RECOVERED
+  createdAt    DateTime @default(now())
+}
+
+model DetectedVehicle {
+  id          String   @id @default(cuid())
+  plateNumber String
+  location    String?  // Camera location
+  make        String?
+  model       String?
+  color       String?
+  confidence  Float?
+  timestamp   DateTime @default(now())
+  imageUrl    String?
+}
+
