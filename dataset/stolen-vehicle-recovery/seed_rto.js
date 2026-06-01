@@ -68,83 +68,34 @@ async function seed() {
   const entries = [];
   const seenPlates = new Set();
 
-  // Mismatched Plate
-  const MISMATCH_PLATE = "KL1623942";
-  entries.push({
-    plateNumber: MISMATCH_PLATE,
-    make: "Tata", // Mismatched (Real is likely different)
-    model: "Nano",
-    variant: "Std",
-    color: "Pink",
-    ownerName: "Abhishek Nair",
-    aadharNumber: randomAadhar(),
-    phone: randomPhone(),
-    createdAt: randomDateInPast10Years()
-  });
-  seenPlates.add(MISMATCH_PLATE);
+  // Insert the requested plates explicitly
+  const customPlates = [
+    { plateNumber: "KL818731", make: "Tata", model: "Tiago", color: "grey" },
+    { plateNumber: "KL01CM5472", make: "Ford", model: "Ecosport", color: "brown" },
+    { plateNumber: "KL16Z3942", make: "Maruti", model: "WagonR", color: "silver" },
+    { plateNumber: "KL81A7997", make: "Hyundai", model: "Creta", color: "grey" },
+    { plateNumber: "DL12CQ9923", make: "Honda", model: "City", color: "red" } // Mismatched intentionally
+  ];
 
-  // Include KLO1CM5472 as a valid plate
-  entries.push({
-    plateNumber: "KLO1CM5472",
-    make: "Ford",
-    model: "EcoSport", // Random model for Ford
-    variant: "Base",
-    color: "brown",
-    ownerName: randomName(),
-    aadharNumber: randomAadhar(),
-    phone: randomPhone(),
-    createdAt: randomDateInPast10Years()
-  });
-  seenPlates.add("KLO1CM5472");
-
-
-  // Include specific video plates that were detected, so they show as VALID
-  entries.push({
-    plateNumber: "KL81A7997",
-    make: "hyundai",
-    model: "creta",
-    variant: "Base",
-    color: "grey",
-    ownerName: randomName(),
-    aadharNumber: randomAadhar(),
-    phone: randomPhone(),
-    createdAt: randomDateInPast10Years()
-  });
-  seenPlates.add("KL81A7997");
-
-  entries.push({
-    plateNumber: "OL12C09923",
-    make: "Tata",
-    model: "Nexon",
-    variant: "Base",
-    color: "silver",
-    ownerName: randomName(),
-    aadharNumber: randomAadhar(),
-    phone: randomPhone(),
-    createdAt: randomDateInPast10Years()
-  });
-  seenPlates.add("OL12C09923");
-
-  // Include any other plates if extracted_plates.json was loaded
-  for (const v of extractedPlates) {
-    if (!seenPlates.has(v.plateNumber)) {
+  for (const cp of customPlates) {
+    if (!seenPlates.has(cp.plateNumber)) {
       entries.push({
-        plateNumber: v.plateNumber,
-        make: v.make || "Unknown",
-        model: v.model || "Unknown",
+        plateNumber: cp.plateNumber,
+        make: cp.make,
+        model: cp.model,
         variant: "Base",
-        color: v.color || "White",
+        color: cp.color,
         ownerName: randomName(),
         aadharNumber: randomAadhar(),
         phone: randomPhone(),
         createdAt: randomDateInPast10Years()
       });
-      seenPlates.add(v.plateNumber);
+      seenPlates.add(cp.plateNumber);
     }
   }
 
-  // Generate around 100 random entries
-  while (entries.length < 100 + extractedPlates.length) {
+  // Generate random entries until we hit the total limit of 110
+  while (entries.length < 110) {
     const p = randomPlate();
     if (!seenPlates.has(p)) {
       const make = randomChoice(Object.keys(makesModels));
