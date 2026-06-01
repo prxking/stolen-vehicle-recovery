@@ -224,7 +224,7 @@ if __name__ == "__main__":
             hud.update_video_frame(web_frame)
 
             # Generate the unified HUD canvas for the web app
-            latest_frame_for_web = hud.render()
+            latest_frame_for_web = hud.render().copy()
 
     except Exception as e:
         print(f"Interrupted or errored: {e}")
