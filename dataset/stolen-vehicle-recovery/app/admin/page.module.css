@@ -184,3 +184,111 @@
   color: #fff;
   box-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
 }
+
+.trackBtn {
+  background: rgba(0, 229, 255, 0.1);
+  color: var(--primary-glow);
+  border: 1px solid var(--primary-glow);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+.trackBtn:hover {
+  background: var(--primary-glow);
+  color: #000;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+.trackingModalContent {
+  position: relative;
+  background: #0a0a0a;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 40px rgba(0, 255, 128, 0.2);
+  width: 500px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 1px solid rgba(0, 255, 128, 0.3);
+}
+
+.timeline {
+  position: relative;
+  padding-left: 20px;
+  margin-top: 20px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(0, 255, 128, 0.3);
+}
+
+.timelineItem {
+  position: relative;
+  margin-bottom: 25px;
+  padding-left: 15px;
+}
+
+.timelineItem:last-child {
+  margin-bottom: 0;
+}
+
+.timelineDot {
+  position: absolute;
+  left: -25px;
+  top: 5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #00ff80;
+  box-shadow: 0 0 10px #00ff80;
+}
+
+.timelineContent {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.timelineItem:last-child .timelineContent {
+  background: rgba(0, 255, 128, 0.1);
+  border-color: rgba(0, 255, 128, 0.3);
+}
+
+.timelineItem:last-child .timelineDot {
+  background: #fff;
+  border: 3px solid #00ff80;
+  box-shadow: 0 0 15px #00ff80;
+  width: 14px;
+  height: 14px;
+  left: -26px;
+}
+
+.timelineTime {
+  font-size: 0.8rem;
+  color: var(--primary-glow);
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.timelineLocation {
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.timelineCamera {
+  font-size: 0.75rem;
+  color: #aaa;
+}

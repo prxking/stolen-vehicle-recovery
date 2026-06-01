@@ -19,6 +19,66 @@ from paddleocr import PaddleOCR
 
 from backend.services import save_vehicle_event
 
+import threading
+import time
+import webbrowser
+from flask import Flask, Response
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
+
+latest_frame = None
+
+def generate_frames():
+    global latest_frame
+    while True:
+        if latest_frame is None:
+            time.sleep(0.05)
+            continue
+        ret, buffer = cv2.imencode('.jpg', latest_frame)
+        if not ret: continue
+        frame = buffer.tobytes()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+        time.sleep(0.016) # Cap streaming to ~60 FPS for ultra-smooth playback
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/ping')
+def ping():
+    return "ok"
+
+import subprocess
+import socket
+
+def is_port_in_use(port):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        return s.connect_ex(('localhost', port)) == 0
+
+def ensure_nextjs_running():
+    if not is_port_in_use(3000):
+        print("[INFO] Starting Next.js development server...")
+        nextjs_dir = os.path.join(os.path.dirname(__file__), "dataset", "stolen-vehicle-recovery")
+        subprocess.Popen(["npm", "run", "dev"], cwd=nextjs_dir, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        print("[INFO] Waiting for Next.js to initialize on port 3000...")
+        for _ in range(30):
+            if is_port_in_use(3000):
+                print("[INFO] Next.js is up!")
+                time.sleep(2) # Give it an extra moment to be fully ready
+                break
+            time.sleep(1)
+
+ensure_nextjs_running()
+
+threading.Thread(target=lambda: app.run(host='0.0.0.0', port=5001, debug=False, use_reloader=False), daemon=True).start()
+
+# Automatically redirect user to the admin portal Live Feed tab
+webbrowser.open('http://localhost:3000/admin')
+
+
 # =====================================================
 # PATHS  <<<  UPDATE THESE TO YOUR FILE LOCATIONS  >>>
 # Tip: drag any file into Terminal to get its full path
@@ -34,7 +94,7 @@ VIDEO_PATHS        = ["lulu2.mp4"]
 # =====================================================
 VIDEO_W, VIDEO_H = 960, 540
 CANVAS_W, CANVAS_H = 1200, 800
-SLOW_MS = 1   # Changed from 35 → 1 for smooth playback on Mac
+SLOW_MS = 16  # Delay to allow ~60 FPS processing
 
 # =====================================================
 # DEVICE — Auto-selects MPS (Apple GPU), else CPU
@@ -192,9 +252,6 @@ def predict_color(vehicle_img):
 current_video_idx = 0
 cap = cv2.VideoCapture(VIDEO_PATHS[current_video_idx])
 
-cv2.namedWindow("ANPR SYSTEM", cv2.WINDOW_NORMAL)
-cv2.resizeWindow("ANPR SYSTEM", CANVAS_W, CANVAS_H)
-
 tracks, next_id = {}, 0
 vehicle_buf = defaultdict(list)
 plate_buf = defaultdict(list)
@@ -329,11 +386,13 @@ while True:
 
         cv2.putText(canvas, info_text, (330,520),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,255,0), 2)
-
-        cv2.imshow("ANPR SYSTEM", canvas)
-        if cv2.waitKey(SLOW_MS) & 0xFF == 27:
-            break
+        
+        latest_frame = canvas.copy()
+        
+        # Regulate FPS slightly so it doesn't max out CPU if video is fast
+        time.sleep(SLOW_MS / 1000.0)
 
 cap.release()
-if not HEADLESS:
-    cv2.destroyAllWindows()
+
+# Add a tiny delay to ensure last frame flushes to HTTP client before exiting
+time.sleep(2)

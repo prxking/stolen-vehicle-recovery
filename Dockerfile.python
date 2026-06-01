@@ -13,7 +13,7 @@ COPY pro.py .
 COPY anpr_pipeline/ anpr_pipeline/
 COPY backend/ backend/
 # We need to copy the video file too if it's being used as the input source
-COPY lulu2.mp4 . 
+COPY lulu23.mp4 . 
 
 # Install required Python packages
 # (We install torch CPU version for container compatibility by default,

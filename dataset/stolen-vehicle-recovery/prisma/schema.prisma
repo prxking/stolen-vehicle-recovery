@@ -32,5 +32,19 @@ model DetectedVehicle {
   confidence  Float?
   timestamp   DateTime @default(now())
   imageUrl    String?
+  rtoStatus   String?  @default("VALID") // VALID, UNREGISTERED, MISMATCH
+  rtoDetails  String?  // Stores reason for mismatch if any
 }
 
+model RTODatabase {
+  id           String   @id @default(cuid())
+  plateNumber  String   @unique
+  make         String
+  model        String
+  variant      String?
+  color        String
+  ownerName    String?
+  aadharNumber String
+  phone        String
+  createdAt    DateTime @default(now())
+}

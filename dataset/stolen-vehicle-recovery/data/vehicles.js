@@ -158,6 +158,14 @@ export const vehicleData = {
     "Q5": ["Premium Plus", "Technology"],
     "Q7": ["Premium Plus", "Technology"],
     "e-tron": ["50", "55"]
+  },
+  "Ford": {
+    "EcoSport": ["Ambiente", "Trend", "Titanium", "Titanium+"],
+    "Endeavour": ["Titanium", "Titanium+", "Sport"],
+    "Figo": ["Ambiente", "Trend", "Titanium", "Titanium Blu"],
+    "Aspire": ["Ambiente", "Trend", "Titanium", "Titanium+"],
+    "Freestyle": ["Ambiente", "Trend", "Titanium", "Titanium+"],
+    "Mustang": ["GT Fastback"]
   }
 };
 
