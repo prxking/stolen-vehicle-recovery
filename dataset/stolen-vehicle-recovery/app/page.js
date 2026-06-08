@@ -97,19 +97,33 @@ export default function Home() {
         className={styles.header}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.6, type: "spring", stiffness: 120 }}
+        style={{ textAlign: 'center', marginBottom: '40px' }}
       >
-        <h1 className="neon-text">Stolen Vehicle Portal</h1>
-        <p>Report and track missing vehicles with AI surveillance integration.</p>
+        <h1 className="neon-text" style={{ fontSize: '3rem', margin: '0 0 10px 0', letterSpacing: '3px', textTransform: 'uppercase' }}>Stolen Vehicle Recovery Portal</h1>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          style={{ color: '#00ff80', letterSpacing: '2px', textTransform: 'uppercase', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}
+        >
+          <motion.span 
+            animate={{ opacity: [0.2, 1, 0.2], scale: [0.8, 1.2, 0.8] }}
+            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+            style={{ display: 'inline-block', width: '10px', height: '10px', borderRadius: '50%', background: '#00ff80', boxShadow: '0 0 15px #00ff80' }}
+          ></motion.span>
+          AI Surveillance Integration Active
+        </motion.div>
       </motion.header>
 
       <motion.div 
         className={`glass-panel ${styles.formWrapper}`}
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
+        style={{ border: '1px solid rgba(0, 255, 128, 0.2)', boxShadow: '0 0 40px rgba(0,255,128,0.05)', borderRadius: '16px', padding: '40px', background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(20px)' }}
       >
-        <h2>Report a Missing Vehicle</h2>
+        <h2 style={{ textAlign: 'center', marginBottom: '30px', letterSpacing: '1px', fontSize: '1.5rem', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '15px' }}>Report a Missing Vehicle</h2>
         <motion.form 
           onSubmit={handleInitialSubmit} 
           className={styles.form}
@@ -204,13 +218,20 @@ export default function Home() {
           <motion.button 
             type="submit" 
             className="btn-primary" 
-            style={{marginTop: '20px', width: '100%'}}
+            style={{marginTop: '30px', width: '100%', padding: '15px', fontSize: '1.2rem', letterSpacing: '2px', textTransform: 'uppercase', fontWeight: 'bold'}}
             variants={itemVariants}
-            whileHover={{ scale: 1.02 }}
+            whileHover={{ scale: 1.02, boxShadow: '0 0 30px rgba(0, 255, 128, 0.4)' }}
             whileTap={{ scale: 0.98 }}
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Submitting...' : 'Submit Report'}
+            {isSubmitting ? (
+              <motion.span
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ repeat: Infinity, duration: 1 }}
+              >
+                Submitting Report...
+              </motion.span>
+            ) : 'Submit Report ➔'}
           </motion.button>
         </motion.form>
       </motion.div>

@@ -1,0 +1,11 @@
+[INFO] Starting Next.js development server...
+Traceback (most recent call last):
+  File "/Users/prasanth/Documents/project v1/project v4/main.py", line 98, in <module>
+    ensure_nextjs_running()
+  File "/Users/prasanth/Documents/project v1/project v4/main.py", line 75, in ensure_nextjs_running
+    subprocess.Popen(["npm", "run", "dev"], cwd=nextjs_dir, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+  File "/opt/homebrew/Cellar/python@3.11/3.11.15_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/opt/homebrew/Cellar/python@3.11/3.11.15_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'npm'

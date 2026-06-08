@@ -1,8 +1,8 @@
-import cv2
-import torch
-import torch.nn as nn
-import torchvision.transforms as T
-import torchvision.models as models
+import cv2  # type: ignore
+import torch  # type: ignore
+import torch.nn as nn  # type: ignore
+import torchvision.transforms as T  # type: ignore
+import torchvision.models as models  # type: ignore
 
 class ColorClassifier:
     COLOR_CLASSES = [

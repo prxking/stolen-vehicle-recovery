@@ -1,8 +1,8 @@
-from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from service import get_vehicle_logs
-import os
+from fastapi import FastAPI, Request  # type: ignore
+from fastapi.responses import HTMLResponse  # type: ignore
+from fastapi.templating import Jinja2Templates  # type: ignore
+from service import get_vehicle_logs  # type: ignore
+import os  # type: ignore
 
 app = FastAPI()
 

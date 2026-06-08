@@ -1,5 +1,5 @@
-import sqlite3
-import os
+import sqlite3  # type: ignore
+import os  # type: ignore
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, "data")

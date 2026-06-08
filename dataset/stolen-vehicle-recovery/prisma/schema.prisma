@@ -46,5 +46,6 @@ model RTODatabase {
   ownerName    String?
   aadharNumber String
   phone        String
+  imageUrl     String?
   createdAt    DateTime @default(now())
 }

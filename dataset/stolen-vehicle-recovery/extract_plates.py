@@ -1,15 +1,15 @@
-import sys
-import os
-import cv2
-import json
-import torch
-import torchvision.transforms as T
-import torchvision.models as models
-import torch.nn as nn
-from ultralytics import YOLO
-from paddleocr import PaddleOCR
-from collections import defaultdict
-import re
+import sys  # type: ignore
+import os  # type: ignore
+import cv2  # type: ignore
+import json  # type: ignore
+import torch  # type: ignore
+import torchvision.transforms as T  # type: ignore
+import torchvision.models as models  # type: ignore
+import torch.nn as nn  # type: ignore
+from ultralytics import YOLO  # type: ignore
+from paddleocr import PaddleOCR  # type: ignore
+from collections import defaultdict  # type: ignore
+import re  # type: ignore
 
 os.environ["FLAGS_log_level"] = "3"
 

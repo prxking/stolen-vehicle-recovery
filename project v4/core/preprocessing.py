@@ -1,8 +1,8 @@
-import cv2
-import numpy as np
-import re
-import torch
-from paddleocr import PaddleOCR
+import cv2  # type: ignore
+import numpy as np  # type: ignore
+import re  # type: ignore
+import torch  # type: ignore
+from paddleocr import PaddleOCR  # type: ignore
 
 # Automatically configure hardware acceleration device
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"

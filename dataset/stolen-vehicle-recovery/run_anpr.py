@@ -1,22 +1,22 @@
-import sys
-import os
+import sys  # type: ignore
+import os  # type: ignore
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
 os.environ["FLAGS_log_level"] = "3"
 
 # ===================== IMPORTS =====================
-import cv2
-import torch
-import torch.nn as nn
-import torchvision.transforms as T
-import torchvision.models as models
-import numpy as np
-from ultralytics import YOLO
-from collections import defaultdict
-import re
-from paddleocr import PaddleOCR
-import requests
-import uuid
+import cv2  # type: ignore
+import torch  # type: ignore
+import torch.nn as nn  # type: ignore
+import torchvision.transforms as T  # type: ignore
+import torchvision.models as models  # type: ignore
+import numpy as np  # type: ignore
+from ultralytics import YOLO  # type: ignore
+from collections import defaultdict  # type: ignore
+import re  # type: ignore
+from paddleocr import PaddleOCR  # type: ignore
+import requests  # type: ignore
+import uuid  # type: ignore
 
 # =====================================================
 # NEXT.JS PORTAL CONFIGURATION

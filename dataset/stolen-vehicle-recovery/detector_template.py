@@ -7,11 +7,11 @@ Instructions:
    Command: python3 detector_template.py
 """
 
-import requests
-import time
-import os
-import urllib.request
-import uuid
+import requests  # type: ignore
+import time  # type: ignore
+import os  # type: ignore
+import urllib.request  # type: ignore
+import uuid  # type: ignore
 
 # The URL of your Next.js API
 API_URL = "http://localhost:3000/api/detect"

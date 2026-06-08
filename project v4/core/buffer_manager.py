@@ -1,6 +1,6 @@
-import time
-import cv2
-import numpy as np
+import time  # type: ignore
+import cv2  # type: ignore
+import numpy as np  # type: ignore
 
 class VehicleBuffer:
     def __init__(self, track_id: int):

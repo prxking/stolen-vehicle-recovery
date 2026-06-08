@@ -1,6 +1,7 @@
 import sys
 import os
 import time
+# pyrefly: ignore [missing-import]
 import cv2
 from collections import defaultdict
 import subprocess
@@ -9,6 +10,7 @@ import webbrowser
 import threading
 import tkinter as tk
 
+# pyrefly: ignore [missing-import]
 from flask import Flask, Response, jsonify
 from flask_cors import CORS
 
@@ -33,6 +35,23 @@ latest_frame_for_web = None
 
 app = Flask(__name__)
 CORS(app)
+
+import base64
+live_data = {
+    'ai_fps': 0, 'gui_fps': 60.0, 'plate': '-', 'conf': 0, 'make': '-', 'color': '-', 'status': 'IDLE',
+    'crop_vehicle': '', 'crop_plate': '', 'crop_gray': '', 'crop_clahe': ''
+}
+
+def to_b64(img):
+    if img is None or getattr(img, 'size', 0) == 0: return ""
+    ret, buf = cv2.imencode('.jpg', img, [cv2.IMWRITE_JPEG_QUALITY, 85])
+    if not ret: return ""
+    return base64.b64encode(buf).decode('utf-8')
+
+@app.route('/live_data')
+def get_live_data():
+    return jsonify(live_data)
+
 
 def generate_frames():
     global latest_frame_for_web
@@ -70,13 +89,16 @@ def ensure_nextjs_running():
     if not is_port_in_use(3000):
         print("[INFO] Starting Next.js development server...")
         nextjs_dir = os.path.join(BASE_DIR, "..", "dataset", "stolen-vehicle-recovery")
-        subprocess.Popen(["npm", "run", "dev"], cwd=nextjs_dir, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        for _ in range(30):
-            if is_port_in_use(3000):
-                print("[INFO] Next.js is up!")
-                time.sleep(2)
-                break
-            time.sleep(1)
+        try:
+            subprocess.Popen(["npm", "run", "dev"], cwd=nextjs_dir, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            for _ in range(30):
+                if is_port_in_use(3000):
+                    print("[INFO] Next.js is up!")
+                    time.sleep(2)
+                    break
+                time.sleep(1)
+        except FileNotFoundError:
+            print("[WARN] npm command not found. Skipping Next.js startup.")
 
 def sharp(img):
     return cv2.Laplacian(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY), cv2.CV_64F).var()
@@ -94,24 +116,31 @@ def iou(a, b):
 # =====================================================
 if __name__ == "__main__":
     ensure_nextjs_running()
-    webbrowser.open('http://localhost:3000/admin')
+    webbrowser.open('http://localhost:3000/admin', new=0)
     
     # Start Flask Server
     threading.Thread(target=run_flask, daemon=True).start()
 
-    print("[INFO] Initializing Models (from project v4)...")
+    # pyrefly: ignore [missing-import]
+    import torch
+    device = 'mps' if torch.backends.mps.is_available() else 'cpu'
+    
     vehicle_detector = VehicleDetector(os.path.join(BASE_DIR, "weights", "vehicle_detector.pt"), conf_threshold=0.4)
     plate_detector = PlateDetector(os.path.join(BASE_DIR, "weights", "plate_detector.pt"), conf_threshold=0.4)
     vehicle_classifier = VehicleClassifier(os.path.join(BASE_DIR, "weights", "vehicle_classifier.pt"))
-    color_classifier = ColorClassifier(os.path.join(BASE_DIR, "weights", "color_classifier.pth"), device="cpu")
+    color_classifier = ColorClassifier(os.path.join(BASE_DIR, "weights", "color_classifier.pth"), device=device)
     ocr_preprocessor = PlatePreprocessor(ocr_lang='en')
 
     # Initialize Tactical Display UI (from project v4)
     hud = TacticalDisplay()
 
-    VIDEO_PATHS = [os.path.join(BASE_DIR, "..", "lulu2.mp4")]
+    VIDEO_PATHS = [
+        os.path.join(BASE_DIR, "..", "lulu2.mp4")
+    ]
     current_video_idx = 0
     cap = cv2.VideoCapture(VIDEO_PATHS[current_video_idx])
+    if "lulu4.mp4" in VIDEO_PATHS[current_video_idx]:
+        cap.set(cv2.CAP_PROP_POS_MSEC, 1000)
 
     VEHICLE_BUF, PLATE_BUF, MIN_ROI_FRAMES, IOU_THRESH, SIZE_WEIGHT = 18, 6, 12, 0.4, 0.15
     tracks, next_id = {}, 0
@@ -133,6 +162,9 @@ if __name__ == "__main__":
                     break
                 cap.release()
                 cap = cv2.VideoCapture(VIDEO_PATHS[current_video_idx])
+                if "lulu4.mp4" in VIDEO_PATHS[current_video_idx]:
+                    cap.set(cv2.CAP_PROP_POS_MSEC, 1000)
+                    
                 tracks, next_id = {}, 0
                 vehicle_buf.clear(); plate_buf.clear(); roi_frames.clear(); processed.clear()
                 continue
@@ -175,7 +207,10 @@ if __name__ == "__main__":
                         vehicle_buf[vid].append((sharp(crop), crop))
                         if len(vehicle_buf[vid]) > VEHICLE_BUF: vehicle_buf[vid].pop(0)
 
-                        plates = plate_detector.detect(crop)
+                        if len(plate_buf[vid]) < PLATE_BUF:
+                            plates = plate_detector.detect(crop)
+                        else:
+                            plates = []
                         for px1, py1, px2, py2, pconf in plates:
                             # Add horizontal padding to ensure full plate width is captured
                             pw = px2 - px1
@@ -197,34 +232,63 @@ if __name__ == "__main__":
                 if len(vehicle_buf[vid]) >= VEHICLE_BUF and len(plate_buf[vid]) >= PLATE_BUF:
                     best_vehicle = max(vehicle_buf[vid], key=lambda x:x[0])[1]
                     best_plate = max(plate_buf[vid], key=lambda x:x[0])[1]
-
-                    steps = ocr_preprocessor.preprocess(best_plate)
-                    if steps:
-                        plate_text, score, variant = ocr_preprocessor.run_ocr_multiversion(steps)
-                    else:
-                        plate_text, score = "NOTFOUND", 0.0
-
-                    cname, cconf = vehicle_classifier.classify(best_vehicle)
-                    color = color_classifier.classify(best_vehicle)
-
-                    if plate_text not in ["NOT FOUND", "NOTFOUND"] and len(plate_text) >= 4:
-                        save_vehicle_event(
-                            plate=plate_text, vclass=cname, color=color,
-                            camera_id="CAM_01", location="Main Road", frame=best_vehicle
-                        )
-                        # Update Tkinter HUD Data
-                        hud.update_detection_panel(plate_text, cname, color, score)
-                        hud.update_preprocessing_crops(best_vehicle, best_plate, steps)
-                        
+                    
                     processed.add(vid)
+
+                    def process_extraction(best_vehicle, best_plate):
+                        steps = ocr_preprocessor.preprocess(best_plate)
+                        if steps:
+                            plate_text, score, variant = ocr_preprocessor.run_ocr_multiversion(steps)
+                        else:
+                            plate_text, score = "NOTFOUND", 0.0
+
+                        cname, cconf = vehicle_classifier.classify(best_vehicle)
+                        cname_lower = cname.lower()
+                        
+                        if cname_lower in ["swift dezire", "swift dzire", "swift_dezire", "swift", "maruti suzuki swift"]:
+                            cname = "Suzuki Swift"
+                        elif cname_lower in ["maruti suzuki ciaz", "ciaz", "maruti ciaz"]:
+                            cname = "Suzuki Ciaz"
+                        elif cname_lower in ["hyundai creta", "creta"]:
+                            cname = "HyundaI Creta"
+                        elif cname_lower in ["wagonr", "wagon r", "maruti suzuki wagonr", "maruti wagonr"]:
+                            cname = "Suzuki WagonR"
+                        elif cname_lower in ["ford ecosport", "ecosport"]:
+                            cname = "Ford Ecosport"
+                            
+                        color = color_classifier.classify(best_vehicle)
+
+                        if plate_text not in ["NOT FOUND", "NOTFOUND"] and len(plate_text) >= 4:
+                            save_vehicle_event(
+                                plate=plate_text, vclass=cname, color=color,
+                                camera_id="CAM_01", location="Main Road", frame=best_vehicle
+                            )
+                            # Update Tkinter HUD Data
+                            hud.update_detection_panel(plate_text, cname, color, score)
+                            hud.update_preprocessing_crops(best_vehicle, best_plate, steps)
+
+                            live_data['plate'] = plate_text
+                            live_data['make'] = cname
+                            live_data['color'] = color
+                            live_data['conf'] = score
+                            live_data['crop_vehicle'] = to_b64(best_vehicle)
+                            live_data['crop_plate'] = to_b64(best_plate)
+                            live_data['crop_gray'] = to_b64(steps.get('grayscale') if steps else None)
+                            live_data['crop_clahe'] = to_b64(steps.get('clahe') if steps else None)
+                            live_data['status'] = 'DETECTED'
+
+                    threading.Thread(target=process_extraction, args=(best_vehicle.copy(), best_plate.copy()), daemon=True).start()
 
             # Update UI state
             elapsed = time.time() - t0
-            hud.update_metrics(ai_fps=(frame_count / elapsed), gui_fps=60.0)
+            current_fps = frame_count / elapsed
+            hud.update_metrics(ai_fps=current_fps, gui_fps=60.0)
             hud.update_video_frame(web_frame)
 
-            # Generate the unified HUD canvas for the web app
-            latest_frame_for_web = hud.render().copy()
+            live_data['ai_fps'] = current_fps
+
+            # Generate the unified HUD canvas for the web app (now just raw video for web)
+            latest_frame_for_web = web_frame.copy()
 
     except Exception as e:
         print(f"Interrupted or errored: {e}")

@@ -1,6 +1,6 @@
-import cv2
-import numpy as np
-import time
+import cv2  # type: ignore
+import numpy as np  # type: ignore
+import time  # type: ignore
 
 class TacticalDisplay:
     """
@@ -68,7 +68,7 @@ class TacticalDisplay:
         
         # Header OCR cell
         cv2.putText(self.canvas, "FINAL OCR ELECT", (920, 600), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (150, 150, 150), 1)
-
+        
     def _paste_crop(self, title, img, idx, bottom_label=None):
         if img is None or img.size == 0:
             return
@@ -154,7 +154,24 @@ class TacticalDisplay:
         cv2.putText(self.canvas, f"TIME: {det['time']}", (900, 540), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
         
         cv2.rectangle(self.canvas, (900, 610), (1150, 710), (255, 255, 255), -1)
-        cv2.putText(self.canvas, det['plate'], (930, 675), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0, 0, 0), 4)
+        
+        plate_text = det['plate']
+        font_scale = 1.5
+        font_thickness = 4
+        text_size, _ = cv2.getTextSize(plate_text, cv2.FONT_HERSHEY_SIMPLEX, font_scale, font_thickness)
+        
+        max_width = 230
+        if text_size[0] > max_width:
+            font_scale = font_scale * (max_width / text_size[0])
+            font_thickness = max(1, int(font_thickness * (max_width / text_size[0])))
+            text_size, _ = cv2.getTextSize(plate_text, cv2.FONT_HERSHEY_SIMPLEX, font_scale, font_thickness)
+            
+        box_w = 250
+        box_h = 100
+        text_x = 900 + int((box_w - text_size[0]) / 2)
+        text_y = 610 + int((box_h + text_size[1]) / 2)
+        
+        cv2.putText(self.canvas, plate_text, (text_x, text_y), cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), font_thickness)
 
         # 4. Crops
         if self.crops["DET. VEHICLE"] is not None:

@@ -1,8 +1,8 @@
-import os
-import cv2
-import requests
-import threading
-from datetime import datetime
+import os  # type: ignore
+import cv2  # type: ignore
+import requests  # type: ignore
+import threading  # type: ignore
+from datetime import datetime  # type: ignore
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 NEXT_PUBLIC_DIR = os.path.join(BASE_DIR, "dataset", "stolen-vehicle-recovery", "public", "detections")
@@ -18,6 +18,8 @@ def _send_to_nextjs(payload, api_url):
                 print(f"    --> MATCH FOUND: Vehicle {payload.get('plateNumber')} flagged as SPOTTED!")
         else:
             print(f"[ERROR] API returned {response.status_code}: {response.text}")
+    except requests.exceptions.ConnectionError:
+        print(f"[WARN] Next.js API is unreachable (Connection refused). Detection for {payload.get('plateNumber', 'unknown')} not sent.")
     except Exception as e:
         print(f"[ERROR] Failed to communicate with Next.js API: {e}")
 

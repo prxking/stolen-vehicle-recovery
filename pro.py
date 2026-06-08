@@ -1,29 +1,29 @@
-import sys
-import os
+import sys  # type: ignore
+import os  # type: ignore
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
 os.environ["FLAGS_log_level"] = "3"
 
 # ===================== IMPORTS =====================
-import cv2
-import torch
-import torch.nn as nn
-import torchvision.transforms as T
-import torchvision.models as models
-import numpy as np
-from ultralytics import YOLO
-from collections import defaultdict
-import re
-# pyrefly: ignore [missing-import]
-from paddleocr import PaddleOCR
+import cv2  # type: ignore
+import torch  # type: ignore
+import torch.nn as nn  # type: ignore
+import torchvision.transforms as T  # type: ignore
+import torchvision.models as models  # type: ignore
+import numpy as np  # type: ignore
+from ultralytics import YOLO  # type: ignore
+from collections import defaultdict  # type: ignore
+import re  # type: ignore
+# type: ignore [missing-import]
+from paddleocr import PaddleOCR  # type: ignore
 
-from backend.services import save_vehicle_event
+from backend.services import save_vehicle_event  # type: ignore
 
-import threading
-import time
-import webbrowser
-from flask import Flask, Response
-from flask_cors import CORS
+import threading  # type: ignore
+import time  # type: ignore
+import webbrowser  # type: ignore
+from flask import Flask, Response  # type: ignore
+from flask_cors import CORS  # type: ignore
 
 app = Flask(__name__)
 CORS(app)
@@ -51,8 +51,8 @@ def video_feed():
 def ping():
     return "ok"
 
-import subprocess
-import socket
+import subprocess  # type: ignore
+import socket  # type: ignore
 
 def is_port_in_use(port):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:

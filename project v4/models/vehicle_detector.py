@@ -1,6 +1,6 @@
-import cv2
-import torch
-from ultralytics import YOLO
+import cv2  # type: ignore
+import torch  # type: ignore
+from ultralytics import YOLO  # type: ignore
 
 class VehicleDetector:
     def __init__(self, model_path: str, conf_threshold: float = 0.4):
@@ -9,7 +9,8 @@ class VehicleDetector:
         """
         self.model = YOLO(model_path)
         self.conf_threshold = conf_threshold
-        # Check if CUDA is active to enable FP16 half-precision
+        self.device = 'mps' if torch.backends.mps.is_available() else 'cpu'
+        self.model.to(self.device)
         self.use_half = torch.cuda.is_available()
 
     def detect(self, frame):
@@ -22,7 +23,7 @@ class VehicleDetector:
             frame, 
             conf=self.conf_threshold, 
             verbose=False,
-            device='cpu'
+            device=self.device
         )[0]
         
         detections = []

@@ -1,0 +1,203 @@
+ * Serving Flask app 'main'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.31.53:5001
+[33mPress CTRL+C to quit[0m
+/Users/prasanth/Documents/project v1/lib/python3.11/site-packages/paddle/utils/cpp_extension/extension_utils.py:712: UserWarning: No ccache found. Please be aware that recompiling all source files may be required. You can download and install ccache from: https://github.com/ccache/ccache/blob/master/doc/INSTALL.md
+  warnings.warn(warning_message)
+[32mCreating model: ('PP-LCNet_x1_0_doc_ori', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `/Users/prasanth/.paddlex/official_models/PP-LCNet_x1_0_doc_ori`.[0m
+[32mCreating model: ('UVDoc', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `/Users/prasanth/.paddlex/official_models/UVDoc`.[0m
+[32mCreating model: ('PP-LCNet_x1_0_textline_ori', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `/Users/prasanth/.paddlex/official_models/PP-LCNet_x1_0_textline_ori`.[0m
+[32mCreating model: ('PP-OCRv5_server_det', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `/Users/prasanth/.paddlex/official_models/PP-OCRv5_server_det`.[0m
+[32mCreating model: ('en_PP-OCRv5_mobile_rec', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `/Users/prasanth/.paddlex/official_models/en_PP-OCRv5_mobile_rec`.[0m
+127.0.0.1 - - [03/Jun/2026 10:11:50] "GET /video_feed HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:11:50] "GET /video_feed HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:11:51] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:11:52] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:11:52] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:11:54] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:11:54] "GET /ping HTTP/1.1" 200 -
+OCR Variant: CLAHE_MORPH_TOPHAT_3X | Text: KL818731 | Confidence: 0.9960127.0.0.1 - - [03/Jun/2026 10:11:54] "GET /live_data HTTP/1.1" 200 -
+
+  [OCR Early-Exit triggered for CLAHE_MORPH_TOPHAT_3X with high confidence: 0.9960]
+127.0.0.1 - - [03/Jun/2026 10:11:54] "GET /ping HTTP/1.1" 200 -
+[SUCCESS] Sent detection to Next.js API: KL818731
+127.0.0.1 - - [03/Jun/2026 10:11:55] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:11:55] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:11:56] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:11:56] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:11:59] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:11:59] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:11:59] "GET /video_feed HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:11:59] "GET /video_feed HTTP/1.1" 200 -
+OCR Variant: CLAHE_MORPH_TOPHAT_3X | Text: KL01CM5472 | Confidence: 0.9735
+  [OCR Early-Exit triggered for CLAHE_MORPH_TOPHAT_3X with high confidence: 0.9735]
+[SUCCESS] Sent detection to Next.js API: KL01CM5472
+127.0.0.1 - - [03/Jun/2026 10:11:59] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:11:59] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:00] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:00] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:00] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:00] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:00] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:00] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:00] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:01] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:01] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:01] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:01] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:01] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:01] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:01] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /live_data HTTP/1.1" 200 -
+OCR Variant: CLAHE_MORPH_TOPHAT_3X | Text: EK11GZ3942 | Confidence: 0.9190
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:04] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:05] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:05] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:05] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:05] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:05] "GET /live_data HTTP/1.1" 200 -
+OCR Variant: CLAHE_BILATERAL_UNSHARP_3X | Text: KL16Z3942 | Confidence: 0.9569
+  [OCR Early-Exit triggered for CLAHE_BILATERAL_UNSHARP_3X with high confidence: 0.9569]
+127.0.0.1 - - [03/Jun/2026 10:12:05] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:05] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:05] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:05] "GET /live_data HTTP/1.1" 200 -
+[SUCCESS] Sent detection to Next.js API: KL16Z3942
+127.0.0.1 - - [03/Jun/2026 10:12:06] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:06] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:06] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:06] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:06] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:06] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:06] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:07] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:07] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:07] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:07] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:07] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:07] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:07] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:08] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:08] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:08] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:08] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:08] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:08] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /live_data HTTP/1.1" 200 -
+OCR Variant: CLAHE_MORPH_TOPHAT_3X | Text: KL81A7997 | Confidence: 0.9985
+  [OCR Early-Exit triggered for CLAHE_MORPH_TOPHAT_3X with high confidence: 0.9985]
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /live_data HTTP/1.1" 200 -
+[SUCCESS] Sent detection to Next.js API: KL81A7997
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:11] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:12] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:12] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:12] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:12] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:12] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:12] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:12] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:13] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:14] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:14] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:14] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:14] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:14] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:14] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:14] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:14] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:15] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:15] "GET /live_data HTTP/1.1" 200 -
+OCR Variant: CLAHE_MORPH_TOPHAT_3X | Text: DL12CQ9923 | Confidence: 0.9177
+127.0.0.1 - - [03/Jun/2026 10:12:15] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:15] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:15] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:15] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:15] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:15] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:15] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:15] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:17] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:17] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:17] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:17] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:17] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:17] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:17] "GET /live_data HTTP/1.1" 200 -
+OCR Variant: CLAHE_BILATERAL_UNSHARP_3X | Text: DL12CQ9923 | Confidence: 0.9932
+127.0.0.1 - - [03/Jun/2026 10:12:17] "GET /live_data HTTP/1.1" 200 -
+  [OCR Early-Exit triggered for CLAHE_BILATERAL_UNSHARP_3X with high confidence: 0.9932]
+127.0.0.1 - - [03/Jun/2026 10:12:17] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:17] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:17] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:17] "GET /live_data HTTP/1.1" 200 -
+[SUCCESS] Sent detection to Next.js API: DL12CQ9923
+127.0.0.1 - - [03/Jun/2026 10:12:17] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:17] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:17] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:17] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:18] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:18] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:18] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:18] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:18] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:18] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:18] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:19] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:19] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:19] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:19] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:19] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:19] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:19] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:20] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:20] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:20] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:20] "GET /ping HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:20] "GET /live_data HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2026 10:12:20] "GET /live_data HTTP/1.1" 200 -
+DATA SENT! Video processing completed.
+127.0.0.1 - - [03/Jun/2026 10:12:20] "GET /live_data HTTP/1.1" 200 -

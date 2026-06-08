@@ -1,5 +1,5 @@
-import numpy as np
-from scipy.optimize import linear_sum_assignment
+import numpy as np  # type: ignore
+from scipy.optimize import linear_sum_assignment  # type: ignore
 
 class KalmanBoxTracker:
     count = 0

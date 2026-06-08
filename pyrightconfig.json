@@ -1,0 +1,7 @@
+{
+  "venvPath": "/Users/prasanth/Documents",
+  "venv": "project v1",
+  "reportMissingImports": false,
+  "reportMissingModuleSource": false,
+  "reportMissingTypeStubs": false
+}
